@@ -72,30 +72,33 @@ void BroadPhaseGrid::build_acceleration_grid( AccelerationGrid& grid,
         xmax[i] += 2*maxdistance + grid_padding;
     }
     
-    Vec3st dims(1,1,1);
+    // Vec3st dims(1,1,1);
     
-    const size_t MAX_D = 2000;
+    // const size_t MAX_D = 2000;
     
-    if(mag(xmax-xmin) > grid_padding)
-    {
-        for(unsigned int i = 0; i < 3; i++)
-        {
-            size_t d = (size_t)ceil((xmax[i] - xmin[i])/length_scale);
+    // if(mag(xmax-xmin) > grid_padding)
+    // {
+    //     for(unsigned int i = 0; i < 3; i++)
+    //     {
+    //         size_t d = (size_t)ceil((xmax[i] - xmin[i])/length_scale);
             
-            if(d < 1) d = 1;
+    //         if(d < 1) d = 1;
             
-            if(d > MAX_D) 
-            {
-                //            std::cout << "BroadPhaseGrid::build_acceleration_grid, dimension " << i << ": d = " << n << std::endl;
-                //            std::cout << "xmin: " << xmin << std::endl;
-                //            std::cout << "xmax: " << xmax << std::endl;
-                //            std::cout << "length_scale: " << length_scale << std::endl;
-                d = MAX_D;
-            }
+    //         if(d > MAX_D) 
+    //         {
+    //             //            std::cout << "BroadPhaseGrid::build_acceleration_grid, dimension " << i << ": d = " << n << std::endl;
+    //             //            std::cout << "xmin: " << xmin << std::endl;
+    //             //            std::cout << "xmax: " << xmax << std::endl;
+    //             //            std::cout << "length_scale: " << length_scale << std::endl;
+    //             d = MAX_D;
+    //         }
             
-            dims[i] = d;
-        }
-    }
+    //         dims[i] = d;
+    //     }
+    // }
+
+    // By Leo: commented above and set manually grid size to
+    Vec3st dims(100,100,100);
     
     grid.set(dims, xmin, xmax);
     
@@ -120,6 +123,8 @@ void BroadPhaseGrid::update_broad_phase( const DynamicSurface& surface, bool con
 {
     
     double grid_scale = surface.get_average_edge_length();
+    // By Leo: setting manually to avoid very small cells
+    grid_scale = fmax(grid_scale,1e-2);
     
     // ---------------
     // vertices
