@@ -961,7 +961,9 @@ bool CollisionPipeline::handle_collisions(double dt)
     num_filtered_4d_tests = 0;
     num_parallel_cases = 0;
     
-    static const int MAX_PASS = 1;
+    // static const int MAX_PASS = 1;
+    // By Leo: Increased number of passes from 1 to 500
+    static const int MAX_PASS = 500;
     
     CollisionCandidateSet update_collision_candidates;
     
