@@ -1,6 +1,7 @@
 #ifndef ARRAY2_H
 #define ARRAY2_H
 
+#include "commonoptions.h"
 #include <algorithm>
 #include <array1.h>
 #include <cassert>
